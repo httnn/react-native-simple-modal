@@ -93,8 +93,7 @@ Modal.propTypes = {
    animationDuration: PropTypes.number,
    animationTension: PropTypes.number,
    modalDidOpen: PropTypes.func,
-   modalDidClose: PropTypes.func,
-   style: PropTypes.object
+   modalDidClose: PropTypes.func
 };
 
 Modal.defaultProps = {

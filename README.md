@@ -18,9 +18,10 @@ import Modal from 'react-native-simple-modal';
 	modalDidOpen={() => undefined}
 	modalDidClose={() => undefined}
 	style={{
-		borderRadius: 2,
-    	margin: 20,
-    	backgroundColor: '#F5F5F5'
+      borderRadius: 2,
+      margin: 20,
+      padding: 10,
+      backgroundColor: '#F5F5F5'
 	}}>
    ...
 </Modal>
@@ -68,11 +69,16 @@ class Example extends Component {
                modalDidOpen={() => console.log('modal did open')}
                modalDidClose={() => console.log('modal did close')}
                style={{alignItems: 'center'}}>
-               <Text style={{fontSize: 20}}>Hello world!</Text>
+               <Text style={{fontSize: 20, marginBottom: 10}}>Hello world!</Text>
                <TouchableOpacity
                   style={{margin: 5}}
                   onPress={() => this.refs.modal.animateOffset(-100)}>
                   <Text>Move modal up</Text>
+               </TouchableOpacity>
+               <TouchableOpacity
+                  style={{margin: 5}}
+                  onPress={() => this.refs.modal.animateOffset(0)}>
+                  <Text>Reset modal position</Text>
                </TouchableOpacity>
                <TouchableOpacity
                   style={{margin: 5}}
