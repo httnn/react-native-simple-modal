@@ -1,0 +1,24 @@
+{
+  "name": "react-native-simple-modal",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bodyflex/react-native-simple-modal.git"
+  },
+  "keywords": [
+    "modal",
+    "react-native",
+    "dialog"
+  ],
+  "author": "bodyflex",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bodyflex/react-native-simple-modal/issues"
+  },
+  "homepage": "https://github.com/bodyflex/react-native-simple-modal#readme"
+}
