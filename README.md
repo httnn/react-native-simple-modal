@@ -1,5 +1,5 @@
 # react-native-simple-modal
-A simple JavaScript modal component for React Native.
+A simple JavaScript modal component for React Native. Works on both iOS and Android.
 
 ## Installation
 `npm install react-native-simple-modal --save`
@@ -9,14 +9,19 @@ A simple JavaScript modal component for React Native.
 ### Properties and their default values
 
 ```javascript
+import Modal from 'react-native-simple-modal';
 
 <Modal
-	ref="modal"
 	overlayOpacity={0.75}
 	animationDuration={200}
 	animationTension={40}
 	modalDidOpen={() => undefined}
-	modalDidClose={() => undefined}>
+	modalDidClose={() => undefined}
+	style={{
+		borderRadius: 2,
+    	margin: 20,
+    	backgroundColor: '#F5F5F5'
+	}}>
    ...
 </Modal>
 ```
@@ -25,12 +30,61 @@ A simple JavaScript modal component for React Native.
 
 ```javascript
 // opens the modal
-this.refs.modal.open();
+modalRef.open();
 
 // closes the modal
-this.refs.modal.close();
+modalRef.close();
 
 // can be used to animate a translation of the modal along the Y-axis
-// useful for example when the modal has an text input and the modal needs to move up so that it's not hidden behind the keyboard
-this.refs.modal.animateOffset(number);
+// useful when for example the modal has a text input and the modal needs to move up so that it's not hidden behind the keyboard
+modalRef.animateOffset(number);
+```
+
+## Example
+
+```javascript
+'use strict';
+
+import React from 'react-native';
+import Modal from 'react-native-simple-modal';
+
+const {
+   AppRegistry,
+   Component,
+   Text,
+   TouchableOpacity,
+   View
+} = React;
+
+class Example extends Component {
+   render() {
+      return (
+         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => this.refs.modal.open()}>
+               <Text>Open modal</Text>
+            </TouchableOpacity>
+            <Modal
+               ref="modal"
+               modalDidOpen={() => console.log('modal did open')}
+               modalDidClose={() => console.log('modal did close')}
+               style={{alignItems: 'center'}}>
+               <Text style={{fontSize: 20}}>Hello world!</Text>
+               <TouchableOpacity
+                  style={{margin: 5}}
+                  onPress={() => this.refs.modal.animateOffset(-100)}>
+                  <Text>Move modal up</Text>
+               </TouchableOpacity>
+               <TouchableOpacity
+                  style={{margin: 5}}
+                  onPress={() => this.refs.modal.close()}>
+                  <Text>Close modal</Text>
+               </TouchableOpacity>
+            </Modal>
+         </View>
+      );
+   }
+}
+
+AppRegistry.registerComponent('myapp', () => Example);
+
 ```

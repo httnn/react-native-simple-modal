@@ -61,6 +61,7 @@ class Modal extends Component {
             </TouchableOpacity>
             <Animated.View
                style={[
+                  styles.defaultModalStyle,
                   this.props.style,
                   {opacity, transform: [{scale}, {translateY: offset}]}
                ]}>
@@ -69,6 +70,8 @@ class Modal extends Component {
          </View>
       );
    }
+
+   // public methods
    open() {
       this.setState({open: true});
       this.setPhase(1);
@@ -90,7 +93,8 @@ Modal.propTypes = {
    animationDuration: PropTypes.number,
    animationTension: PropTypes.number,
    modalDidOpen: PropTypes.func,
-   modalDidClose: PropTypes.func
+   modalDidClose: PropTypes.func,
+   style: PropTypes.object
 };
 
 Modal.defaultProps = {
@@ -113,6 +117,12 @@ const styles = StyleSheet.create({
    },
    container: {
       justifyContent: 'center'
+   },
+   defaultModalStyle: {
+      borderRadius: 2,
+      margin: 20,
+      padding: 10,
+      backgroundColor: '#F5F5F5'
    }
 });
 
