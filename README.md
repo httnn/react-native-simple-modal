@@ -1,6 +1,8 @@
 # react-native-simple-modal
 A simple JavaScript modal component for React Native. Works on both iOS and Android.
 
+<img src="https://i.imgur.com/EiwkCWn.gif" width="300" />
+
 ## Installation
 `npm install react-native-simple-modal --save`
 
