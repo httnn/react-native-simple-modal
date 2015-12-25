@@ -1,6 +1,6 @@
 {
   "name": "react-native-simple-modal",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple JavaScript modal component for React Native.",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,9 @@
     "ios",
     "android"
   ],
+  "peerDependencies": {
+    "react-native": "^0.17.0"
+  },
   "author": "bodyflex",
   "license": "MIT",
   "bugs": {
