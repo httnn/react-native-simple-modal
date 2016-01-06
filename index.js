@@ -42,12 +42,14 @@ class Modal extends Component {
       setTimeout(() => {
          if (toValue)
             this.props.modalDidOpen();
-         else
+         else {
             this.props.modalDidClose();
+            this.setState({renderedContent: undefined});
+         }
       }, animationDuration);
    }
    render() {
-      const {opacity, open, scale, offset} = this.state;
+      const {opacity, open, scale, offset, renderedContent} = this.state;
       const {overlayOpacity} = this.props;
       return (
          <View
@@ -65,7 +67,7 @@ class Modal extends Component {
                   this.props.style,
                   {opacity, transform: [{scale}, {translateY: offset}]}
                ]}>
-               {this.props.children}
+               {renderedContent}
             </Animated.View>
          </View>
       );
@@ -74,6 +76,9 @@ class Modal extends Component {
    // public methods
    open() {
       this.setState({open: true});
+      this.setState({
+         renderedContent: this.props.renderContent()
+      });
       this.setPhase(1);
    }
    close() {
@@ -93,7 +98,8 @@ Modal.propTypes = {
    animationDuration: PropTypes.number,
    animationTension: PropTypes.number,
    modalDidOpen: PropTypes.func,
-   modalDidClose: PropTypes.func
+   modalDidClose: PropTypes.func,
+   renderContent: PropTypes.func
 };
 
 Modal.defaultProps = {
@@ -101,7 +107,8 @@ Modal.defaultProps = {
    animationDuration: 200,
    animationTension: 40,
    modalDidOpen: () => undefined,
-   modalDidClose: () => undefined
+   modalDidClose: () => undefined,
+   renderContent: () => undefined
 };
 
 

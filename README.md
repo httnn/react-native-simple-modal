@@ -19,14 +19,13 @@ import Modal from 'react-native-simple-modal';
 	animationTension={40}
 	modalDidOpen={() => undefined}
 	modalDidClose={() => undefined}
+   renderContent={() => undefined}
 	style={{
       borderRadius: 2,
       margin: 20,
       padding: 10,
       backgroundColor: '#F5F5F5'
-	}}>
-   ...
-</Modal>
+	}} />
 ```
 
 ### Methods
@@ -60,6 +59,28 @@ const {
 } = React;
 
 class Example extends Component {
+   renderModalContent() {
+      return (
+         <View>
+            <Text style={{fontSize: 20, marginBottom: 10}}>Hello world!</Text>
+            <TouchableOpacity
+               style={{margin: 5}}
+               onPress={() => this.refs.modal.animateOffset(-100)}>
+               <Text>Move modal up</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+               style={{margin: 5}}
+               onPress={() => this.refs.modal.animateOffset(0)}>
+               <Text>Reset modal position</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+               style={{margin: 5}}
+               onPress={() => this.refs.modal.close()}>
+               <Text>Close modal</Text>
+            </TouchableOpacity>
+         </View>
+      );
+   }
    render() {
       return (
          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -70,24 +91,8 @@ class Example extends Component {
                ref="modal"
                modalDidOpen={() => console.log('modal did open')}
                modalDidClose={() => console.log('modal did close')}
-               style={{alignItems: 'center'}}>
-               <Text style={{fontSize: 20, marginBottom: 10}}>Hello world!</Text>
-               <TouchableOpacity
-                  style={{margin: 5}}
-                  onPress={() => this.refs.modal.animateOffset(-100)}>
-                  <Text>Move modal up</Text>
-               </TouchableOpacity>
-               <TouchableOpacity
-                  style={{margin: 5}}
-                  onPress={() => this.refs.modal.animateOffset(0)}>
-                  <Text>Reset modal position</Text>
-               </TouchableOpacity>
-               <TouchableOpacity
-                  style={{margin: 5}}
-                  onPress={() => this.refs.modal.close()}>
-                  <Text>Close modal</Text>
-               </TouchableOpacity>
-            </Modal>
+               renderContent={this.renderModalContent.bind(this)}
+               style={{alignItems: 'center'}} />
          </View>
       );
    }
