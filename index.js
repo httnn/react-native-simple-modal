@@ -43,8 +43,9 @@ class Modal extends Component {
          if (toValue)
             this.props.modalDidOpen();
          else {
-            this.props.modalDidClose();
+            this.setState({open: false});
             this.setState({renderedContent: undefined});
+            this.props.modalDidClose();
          }
       }, animationDuration);
    }
@@ -82,7 +83,6 @@ class Modal extends Component {
       this.setPhase(1);
    }
    close() {
-      this.setState({open: false});
       this.setPhase(0);
    }
    animateOffset(offset) {
