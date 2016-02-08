@@ -22,32 +22,33 @@ class Modal extends Component {
       };
    }
    setPhase(toValue) {
-      const {animationDuration, animationTension} = this.props;
-      Animated.timing(
-         this.state.opacity,
-         {
-            toValue,
-            duration: animationDuration
-         }
-      ).start();
+      if (this.state.open != toValue) {
+         const {animationDuration, animationTension} = this.props;
+         Animated.timing(
+            this.state.opacity,
+            {
+               toValue,
+               duration: animationDuration
+            }
+         ).start();
 
-      Animated.spring(
-         this.state.scale,
-         {
-            toValue: toValue ? 1 : 0.8,
-            tension: animationTension
-         }
-      ).start();
+         Animated.spring(
+            this.state.scale,
+            {
+               toValue: toValue ? 1 : 0.8,
+               tension: animationTension
+            }
+         ).start();
 
-      setTimeout(() => {
-         if (toValue)
-            this.props.modalDidOpen();
-         else {
-            this.setState({open: false});
-            this.setState({renderedContent: undefined});
-            this.props.modalDidClose();
-         }
-      }, animationDuration);
+         setTimeout(() => {
+            if (toValue)
+               this.props.modalDidOpen();
+            else {
+               this.setState({open: false, renderedContent: undefined});
+               this.props.modalDidClose();
+            }
+         }, animationDuration);
+      }
    }
    render() {
       const {opacity, open, scale, offset, renderedContent} = this.state;
