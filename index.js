@@ -24,7 +24,7 @@ class Modal extends Component {
       };
    }
    componentDidMount() {
-      if (Platform.OS === 'Android') {
+      if (Platform.OS === 'android') {
          BackAndroid.addEventListener('hardwareBackPress', () => {
             if (this.state.open) {
                this.close();
