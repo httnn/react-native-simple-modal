@@ -8,7 +8,9 @@ const {
    StyleSheet,
    TouchableOpacity,
    Animated,
-   PropTypes
+   PropTypes,
+   Platform,
+   BackAndroid
 } = React;
 
 class Modal extends Component {
@@ -20,6 +22,17 @@ class Modal extends Component {
          scale: new Animated.Value(0.8),
          offset: new Animated.Value(0)
       };
+   }
+   componentDidMount() {
+      if (Platform.OS === 'Android') {
+         BackAndroid.addEventListener('hardwareBackPress', () => {
+            if (this.state.open) {
+               this.close();
+               return true;
+            }
+            return false;
+         });
+      }
    }
    setPhase(toValue) {
       if (this.state.open != toValue) {

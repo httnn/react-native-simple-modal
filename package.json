@@ -1,6 +1,6 @@
 {
   "name": "react-native-simple-modal",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "A simple JavaScript modal component for React Native.",
   "main": "index.js",
   "scripts": {
