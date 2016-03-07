@@ -104,6 +104,6 @@ class Example extends Component {
    }
 }
 
-AppRegistry.registerComponent('kanttiinit', () => Example);
+AppRegistry.registerComponent('myapp', () => Example);
 
 ```
