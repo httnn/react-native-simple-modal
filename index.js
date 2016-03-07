@@ -23,6 +23,18 @@ class Modal extends Component {
          offset: new Animated.Value(0)
       };
    }
+   componentWillReceiveProps(props) {
+      if (props.open !== this.props.open) {
+         if (props.open)
+            this.open();
+         else
+            this.close();
+      }
+
+      if (props.offset !== this.props.offset) {
+         this.animateOffset(props.offset);
+      }
+   }
    componentDidMount() {
       if (Platform.OS === 'android') {
          BackAndroid.addEventListener('hardwareBackPress', () => {
@@ -64,8 +76,8 @@ class Modal extends Component {
       }
    }
    render() {
-      const {opacity, open, scale, offset, renderedContent} = this.state;
-      const {overlayOpacity} = this.props;
+      const {opacity, open, scale, offset} = this.state;
+      const {overlayOpacity, children} = this.props;
       return (
          <View
          pointerEvents={open ? 'auto' : 'none'}
@@ -82,18 +94,13 @@ class Modal extends Component {
                   this.props.style,
                   {opacity, transform: [{scale}, {translateY: offset}]}
                ]}>
-               {renderedContent}
+               {children}
             </Animated.View>
          </View>
       );
    }
-
-   // public methods
    open() {
       this.setState({open: true});
-      this.setState({
-         renderedContent: this.props.renderContent()
-      });
       this.setPhase(1);
    }
    close() {
@@ -108,21 +115,23 @@ class Modal extends Component {
 }
 
 Modal.propTypes = {
+   open: PropTypes.bool,
+   offset: PropTypes.number,
    overlayOpacity: PropTypes.number,
    animationDuration: PropTypes.number,
    animationTension: PropTypes.number,
    modalDidOpen: PropTypes.func,
-   modalDidClose: PropTypes.func,
-   renderContent: PropTypes.func
+   modalDidClose: PropTypes.func
 };
 
 Modal.defaultProps = {
+   open: false,
+   offset: 0,
    overlayOpacity: 0.75,
    animationDuration: 200,
    animationTension: 40,
    modalDidOpen: () => undefined,
-   modalDidClose: () => undefined,
-   renderContent: () => undefined
+   modalDidClose: () => undefined
 };
 
 

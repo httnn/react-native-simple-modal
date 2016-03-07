@@ -14,21 +14,25 @@ A simple JavaScript modal component for React Native. Works on both iOS and Andr
 import Modal from 'react-native-simple-modal';
 
 <Modal
+	open={false}
+	offset={0}
 	overlayOpacity={0.75}
 	animationDuration={200}
 	animationTension={40}
 	modalDidOpen={() => undefined}
 	modalDidClose={() => undefined}
-   renderContent={() => undefined}
 	style={{
-      borderRadius: 2,
-      margin: 20,
-      padding: 10,
-      backgroundColor: '#F5F5F5'
-	}} />
+	   borderRadius: 2,
+	   margin: 20,
+	   padding: 10,
+	   backgroundColor: '#F5F5F5'
+	}}>
+</Modal>
 ```
 
 ### Methods
+
+**Deprecated! The usage of these methods is discouraged. Use the properties `open` and `offset` instead.**
 
 ```javascript
 // opens the modal
@@ -43,7 +47,6 @@ modalRef.animateOffset(number);
 ```
 
 ## Example
-
 ```javascript
 'use strict';
 
@@ -59,45 +62,48 @@ const {
 } = React;
 
 class Example extends Component {
-   renderModalContent() {
-      return (
-         <View>
-            <Text style={{fontSize: 20, marginBottom: 10}}>Hello world!</Text>
-            <TouchableOpacity
-               style={{margin: 5}}
-               onPress={() => this.refs.modal.animateOffset(-100)}>
-               <Text>Move modal up</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-               style={{margin: 5}}
-               onPress={() => this.refs.modal.animateOffset(0)}>
-               <Text>Reset modal position</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-               style={{margin: 5}}
-               onPress={() => this.refs.modal.close()}>
-               <Text>Close modal</Text>
-            </TouchableOpacity>
-         </View>
-      );
+   constructor() {
+      super();
+      this.state = {
+         open: false
+      };
    }
    render() {
       return (
          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => this.refs.modal.open()}>
+            <TouchableOpacity onPress={() => this.setState({open: true})}>
                <Text>Open modal</Text>
             </TouchableOpacity>
             <Modal
-               ref="modal"
+               offset={this.state.offset}
+               open={this.state.open}
                modalDidOpen={() => console.log('modal did open')}
-               modalDidClose={() => console.log('modal did close')}
-               renderContent={this.renderModalContent.bind(this)}
-               style={{alignItems: 'center'}} />
+               modalDidClose={() => this.setState({open: false})}
+               style={{alignItems: 'center'}}>
+               <View>
+                  <Text style={{fontSize: 20, marginBottom: 10}}>Hello world!</Text>
+                  <TouchableOpacity
+                     style={{margin: 5}}
+                     onPress={() => this.setState({offset: -100})}>
+                     <Text>Move modal up</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                     style={{margin: 5}}
+                     onPress={() => this.setState({offset: 0})}>
+                     <Text>Reset modal position</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                     style={{margin: 5}}
+                     onPress={() => this.setState({open: false})}>
+                     <Text>Close modal</Text>
+                  </TouchableOpacity>
+               </View>
+            </Modal>
          </View>
       );
    }
 }
 
-AppRegistry.registerComponent('myapp', () => Example);
+AppRegistry.registerComponent('kanttiinit', () => Example);
 
 ```
