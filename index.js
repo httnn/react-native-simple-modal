@@ -34,6 +34,10 @@ class Modal extends Component {
       if (props.offset !== this.props.offset) {
          this.animateOffset(props.offset);
       }
+
+      if (props.children !== this.state.children) {
+         this.setState({children: props.children});
+      }
    }
    componentDidMount() {
       if (Platform.OS === 'android') {
@@ -69,15 +73,15 @@ class Modal extends Component {
             if (toValue)
                this.props.modalDidOpen();
             else {
-               this.setState({open: false, renderedContent: undefined});
+               this.setState({open: false, children: undefined});
                this.props.modalDidClose();
             }
          }, animationDuration);
       }
    }
    render() {
-      const {opacity, open, scale, offset} = this.state;
-      const {overlayOpacity, children} = this.props;
+      const {opacity, open, scale, offset, children} = this.state;
+      const {overlayOpacity} = this.props;
       return (
          <View
          pointerEvents={open ? 'auto' : 'none'}
