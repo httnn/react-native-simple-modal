@@ -24,6 +24,10 @@ class Modal extends Component {
       };
    }
    componentWillReceiveProps(props) {
+      if (props.open && props.children !== this.state.children) {
+         this.setState({children: props.children});
+      }
+
       if (props.open !== this.props.open) {
          if (props.open)
             this.open();
@@ -33,10 +37,6 @@ class Modal extends Component {
 
       if (props.offset !== this.props.offset) {
          this.animateOffset(props.offset);
-      }
-
-      if (props.children !== this.state.children) {
-         this.setState({children: props.children});
       }
    }
    componentDidMount() {
