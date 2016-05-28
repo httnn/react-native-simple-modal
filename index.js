@@ -82,10 +82,16 @@ class Modal extends Component {
    render() {
       const {opacity, open, scale, offset, children} = this.state;
       const {overlayOpacity} = this.props;
+      let containerStyles = [styles.absolute, styles.container];
+
+      if (!this.state.open) {
+        containerStyles.push(styles.hidden);
+      }
+
       return (
          <View
          pointerEvents={open ? 'auto' : 'none'}
-         style={[styles.absolute, styles.container]}>
+         style={containerStyles}>
             <TouchableOpacity
             style={styles.absolute}
             onPress={this.close.bind(this)}
@@ -156,6 +162,12 @@ const styles = StyleSheet.create({
       margin: 20,
       padding: 10,
       backgroundColor: '#F5F5F5'
+   },
+   hidden: {
+    top: -10000,
+    left: 0,
+    height: 0,
+    width: 0
    }
 });
 
