@@ -50,16 +50,15 @@ modalRef.animateOffset(number);
 ```javascript
 'use strict';
 
-import React from 'react-native';
+import React, { Component } from 'react';
 import Modal from 'react-native-simple-modal';
 
-const {
+import {
    AppRegistry,
-   Component,
    Text,
    TouchableOpacity,
    View
-} = React;
+} from 'react-native';
 
 class Example extends Component {
    constructor() {

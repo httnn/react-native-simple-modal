@@ -1,17 +1,15 @@
 'use strict';
 
-import React from 'react-native';
+import React, { Component, PropTypes } from 'react';
 
-const {
+import {
    View,
-   Component,
    StyleSheet,
    TouchableOpacity,
    Animated,
-   PropTypes,
    Platform,
    BackAndroid
-} = React;
+} from 'react-native'
 
 class Modal extends Component {
    constructor() {
