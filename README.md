@@ -7,7 +7,7 @@ A simple JavaScript modal component for React Native. Works on both iOS and Andr
 `npm install react-native-simple-modal --save`
 
 ## Usage
-
+See example. Make sure to put the `<Modal>` at the end of the render function so that it renders above the content! (RN currently doesn't yet have support for z-index).
 ### Properties and their default values
 
 ```javascript
