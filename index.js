@@ -92,6 +92,7 @@ class Modal extends Component {
          style={containerStyles}>
             <TouchableOpacity
             style={styles.absolute}
+            disabled={!this.props.closeOnTouchOutside}
             onPress={this.close.bind(this)}
             activeOpacity={0.75}>
                <Animated.View style={{flex: 1, opacity, backgroundColor: 'rgba(0, 0, 0, ' + overlayOpacity + ')'}} />
@@ -129,7 +130,8 @@ Modal.propTypes = {
    animationDuration: PropTypes.number,
    animationTension: PropTypes.number,
    modalDidOpen: PropTypes.func,
-   modalDidClose: PropTypes.func
+   modalDidClose: PropTypes.func,
+   closeOnTouchOutside: PropTypes.bool,
 };
 
 Modal.defaultProps = {
@@ -139,7 +141,8 @@ Modal.defaultProps = {
    animationDuration: 200,
    animationTension: 40,
    modalDidOpen: () => undefined,
-   modalDidClose: () => undefined
+   modalDidClose: () => undefined,
+   closeOnTouchOutside: true,
 };
 
 
