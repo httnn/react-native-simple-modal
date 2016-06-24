@@ -21,6 +21,7 @@ import Modal from 'react-native-simple-modal';
 	animationTension={40}
 	modalDidOpen={() => undefined}
 	modalDidClose={() => undefined}
+	closeOnTouchOutside={true}
 	style={{
 	   borderRadius: 2,
 	   margin: 20,
@@ -48,8 +49,6 @@ modalRef.animateOffset(number);
 
 ## Example
 ```javascript
-'use strict';
-
 import React, { Component } from 'react';
 import Modal from 'react-native-simple-modal';
 
