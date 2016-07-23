@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { Component, PropTypes } from 'react';
 
 import {
@@ -125,6 +123,7 @@ class Modal extends Component {
 Modal.propTypes = {
    open: PropTypes.bool,
    offset: PropTypes.number,
+   overlayBackground: PropTypes.object,
    animationDuration: PropTypes.number,
    animationTension: PropTypes.number,
    modalDidOpen: PropTypes.func,
@@ -163,10 +162,10 @@ const styles = StyleSheet.create({
       backgroundColor: '#F5F5F5'
    },
    hidden: {
-    top: -10000,
-    left: 0,
-    height: 0,
-    width: 0
+      top: -10000,
+      left: 0,
+      height: 0,
+      width: 0
    }
 });
 
