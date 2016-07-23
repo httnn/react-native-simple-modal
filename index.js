@@ -79,8 +79,7 @@ class Modal extends Component {
    }
    render() {
       const {opacity, open, scale, offset, children} = this.state;
-      const {overlayOpacity} = this.props;
-      let containerStyles = [styles.absolute, styles.container];
+      let containerStyles = [styles.absolute, styles.container, this.props.containerStyle];
 
       if (!this.state.open) {
         containerStyles.push(styles.hidden);
@@ -95,12 +94,12 @@ class Modal extends Component {
             disabled={!this.props.closeOnTouchOutside}
             onPress={this.close.bind(this)}
             activeOpacity={0.75}>
-               <Animated.View style={{flex: 1, opacity, backgroundColor: 'rgba(0, 0, 0, ' + overlayOpacity + ')'}} />
+               <Animated.View style={{flex: 1, opacity, backgroundColor: this.props.overlayBackground}} />
             </TouchableOpacity>
             <Animated.View
                style={[
                   styles.defaultModalStyle,
-                  this.props.style,
+                  this.props.modalStyle,
                   {opacity, transform: [{scale}, {translateY: offset}]}
                ]}>
                {children}
@@ -126,7 +125,6 @@ class Modal extends Component {
 Modal.propTypes = {
    open: PropTypes.bool,
    offset: PropTypes.number,
-   overlayOpacity: PropTypes.number,
    animationDuration: PropTypes.number,
    animationTension: PropTypes.number,
    modalDidOpen: PropTypes.func,
@@ -137,7 +135,7 @@ Modal.propTypes = {
 Modal.defaultProps = {
    open: false,
    offset: 0,
-   overlayOpacity: 0.75,
+   overlayBackground: 'rgba(0, 0, 0, 0.75)',
    animationDuration: 200,
    animationTension: 40,
    modalDidOpen: () => undefined,
