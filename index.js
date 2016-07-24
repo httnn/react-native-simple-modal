@@ -123,7 +123,7 @@ class Modal extends Component {
 Modal.propTypes = {
    open: PropTypes.bool,
    offset: PropTypes.number,
-   overlayBackground: PropTypes.object,
+   overlayBackground: PropTypes.string,
    animationDuration: PropTypes.number,
    animationTension: PropTypes.number,
    modalDidOpen: PropTypes.func,
