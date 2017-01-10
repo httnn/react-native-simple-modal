@@ -19,6 +19,11 @@ class Modal extends Component {
          offset: new Animated.Value(0)
       };
    }
+   componentWillMount() {
+      if (this.props.open) {
+         this.open();
+      }
+   }
    componentWillReceiveProps(props) {
       if (props.open && props.children !== this.state.children) {
          this.setState({children: props.children});
