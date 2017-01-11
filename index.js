@@ -82,7 +82,6 @@ class Modal extends Component {
                this.props.modalDidClose();
             }
          }, animationDuration);
-         console.log(animationDuration);
       }
    }
    render() {
