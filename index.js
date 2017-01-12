@@ -23,11 +23,10 @@ class Modal extends Component {
       if (props.open && props.children !== this.state.children) {
          this.setState({children: props.children});
       }
-      if(props.animationDuration===0){
-        this.state.scale.setValue(1);
-      }else{
-        this.state.scale.setValue(this.props.open? 1 : 0.8);
-      }
+      if (props.animationDuration === 0)
+         this.state.scale.setValue(1);
+      else
+         this.state.scale.setValue(this.props.open? 1 : 0.8);
 
       if (props.open !== this.props.open) {
          if (props.open)
@@ -54,9 +53,9 @@ class Modal extends Component {
    setPhase(toValue) {
       if (this.state.open != toValue) {
          const {animationDuration, animationTension} = this.props;
-         if(animationDuration===0){
+         if (animationDuration === 0)
            this.state.opacity.setValue(toValue);
-         }else {
+         else {
            Animated.timing(
               this.state.opacity,
               {
