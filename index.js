@@ -42,7 +42,7 @@ class Modal extends Component {
          this.animateOffset(props.offset);
       }
    }
-   hardwareBackPress(){
+   hardwareBackPress() {
       if (this.state.open) {
          this.close();
          return true;
@@ -54,7 +54,7 @@ class Modal extends Component {
          BackAndroid.addEventListener('hardwareBackPress', this.hardwareBackPress);
       }
    }
-   componentWillUnmount(){
+   componentWillUnmount() {
       if (Platform.OS === 'android') {
          BackAndroid.removeEventListener('hardwareBackPress', this.hardwareBackPress);
       }
