@@ -18,6 +18,8 @@ class Modal extends Component {
          scale: new Animated.Value(0.8),
          offset: new Animated.Value(0)
       };
+
+      this.hardwareBackPress = this.hardwareBackPress.bind(this);
    }
    componentWillMount() {
       if (this.props.open) {
@@ -44,15 +46,21 @@ class Modal extends Component {
          this.animateOffset(props.offset);
       }
    }
+   hardwareBackPress() {
+      if (this.state.open) {
+         this.close();
+         return true;
+      }
+      return false;
+   }
    componentDidMount() {
       if (Platform.OS === 'android') {
-         BackAndroid.addEventListener('hardwareBackPress', () => {
-            if (this.state.open) {
-               this.close();
-               return true;
-            }
-            return false;
-         });
+         BackAndroid.addEventListener('hardwareBackPress', this.hardwareBackPress);
+      }
+   }
+   componentWillUnmount() {
+      if (Platform.OS === 'android') {
+         BackAndroid.removeEventListener('hardwareBackPress', this.hardwareBackPress);
       }
    }
    setPhase(toValue) {
