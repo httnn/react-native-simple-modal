@@ -3,6 +3,7 @@
   "version": "5.0.0",
   "description": "A simple JavaScript modal component for React Native.",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
