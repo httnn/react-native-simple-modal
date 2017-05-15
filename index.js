@@ -48,8 +48,11 @@ class Modal extends Component {
       }
    }
    hardwareBackPress() {
+
       if (this.state.open) {
-         this.close();
+         if(!this.props.disableOnBackPress) {
+           this.close();
+         }
          return true;
       }
       return false;
@@ -151,6 +154,7 @@ Modal.propTypes = {
    modalDidOpen: PropTypes.func,
    modalDidClose: PropTypes.func,
    closeOnTouchOutside: PropTypes.bool,
+   disableOnBackPress: PropTypes.bool,
 };
 
 Modal.defaultProps = {
@@ -162,6 +166,7 @@ Modal.defaultProps = {
    modalDidOpen: () => undefined,
    modalDidClose: () => undefined,
    closeOnTouchOutside: true,
+   disableOnBackPress: false,
 };
 
 
