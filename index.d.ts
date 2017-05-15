@@ -12,6 +12,7 @@ export interface ModalProps {
   closeOnTouchOutside?: boolean;
   containerStyle?: ReactNative.ViewStyle;
   modalStyle?: ReactNative.ViewStyle;
+  disableOnBackPress?: boolean;
 }
 
 declare class Modal extends React.Component<ModalProps, {}> {
