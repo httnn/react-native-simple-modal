@@ -23,6 +23,7 @@ class Modal extends Component {
    }
    componentWillMount() {
       if (this.props.open) {
+         this.setState({ children: this.props.children });
          this.open();
       }
    }
