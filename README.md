@@ -30,7 +30,8 @@ import Modal from 'react-native-simple-modal';
 	   margin: 20,
 	   padding: 10,
 	   backgroundColor: '#F5F5F5'
-	}}>
+	}}
+  disableOnBackPress={false}>
 </Modal>
 ```
 
