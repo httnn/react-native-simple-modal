@@ -51,10 +51,15 @@ class Modal extends Component {
     }
   }
   hardwareBackPress() {
-    if (this.state.open && !this.props.disableOnBackPress) {
+    if (this.props.disableOnBackPress) {
+      return true;
+    }
+
+    if (this.state.open) {
       this.close();
       return true;
     }
+    
     return false;
   }
   componentDidMount() {
