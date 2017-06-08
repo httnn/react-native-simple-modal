@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Animated,
   Platform,
-  BackAndroid
+  BackHandler,
 } from 'react-native'
 
 class Modal extends Component {
@@ -64,12 +64,12 @@ class Modal extends Component {
   }
   componentDidMount() {
     if (Platform.OS === 'android') {
-      BackAndroid.addEventListener('hardwareBackPress', this.hardwareBackPress);
+      BackHandler.addEventListener('hardwareBackPress', this.hardwareBackPress);
     }
   }
   componentWillUnmount() {
     if (Platform.OS === 'android') {
-      BackAndroid.removeEventListener('hardwareBackPress', this.hardwareBackPress);
+      BackHandler.removeEventListener('hardwareBackPress', this.hardwareBackPress);
     }
   }
   setPhase(toValue) {
