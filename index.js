@@ -11,6 +11,31 @@ import {
 } from 'react-native'
 
 class Modal extends Component {
+
+  static propTypes = {
+    open: PropTypes.bool,
+    offset: PropTypes.number,
+    overlayBackground: PropTypes.string,
+    animationDuration: PropTypes.number,
+    animationTension: PropTypes.number,
+    modalDidOpen: PropTypes.func,
+    modalDidClose: PropTypes.func,
+    closeOnTouchOutside: PropTypes.bool,
+    disableOnBackPress: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    open: false,
+    offset: 0,
+    overlayBackground: 'rgba(0, 0, 0, 0.75)',
+    animationDuration: 200,
+    animationTension: 40,
+    modalDidOpen: () => undefined,
+    modalDidClose: () => undefined,
+    closeOnTouchOutside: true,
+    disableOnBackPress: false,
+  };
+
   constructor() {
     super();
     
@@ -150,31 +175,6 @@ class Modal extends Component {
     ).start();
   }
 }
-
-Modal.propTypes = {
-  open: PropTypes.bool,
-  offset: PropTypes.number,
-  overlayBackground: PropTypes.string,
-  animationDuration: PropTypes.number,
-  animationTension: PropTypes.number,
-  modalDidOpen: PropTypes.func,
-  modalDidClose: PropTypes.func,
-  closeOnTouchOutside: PropTypes.bool,
-  disableOnBackPress: PropTypes.bool,
-};
-
-Modal.defaultProps = {
-  open: false,
-  offset: 0,
-  overlayBackground: 'rgba(0, 0, 0, 0.75)',
-  animationDuration: 200,
-  animationTension: 40,
-  modalDidOpen: () => undefined,
-  modalDidClose: () => undefined,
-  closeOnTouchOutside: true,
-  disableOnBackPress: false,
-};
-
 
 const styles = StyleSheet.create({
   absolute: {
