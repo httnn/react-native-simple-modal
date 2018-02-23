@@ -78,6 +78,12 @@ class Modal extends Component {
       const {animationDuration, animationTension} = this.props;
       if (animationDuration === 0) {
         this.state.opacity.setValue(toValue);
+        if (toValue) {
+          this.props.modalDidOpen();
+        } else {
+          this.setState({open: false, children: undefined});
+          this.props.modalDidClose();
+        }
       } else {
         Animated.timing(
           this.state.opacity,
@@ -93,17 +99,15 @@ class Modal extends Component {
             toValue: toValue ? 1 : 0.8,
             tension: animationTension
           }
-        ).start();
+        ).start(() => {
+          if (toValue) {
+            this.props.modalDidOpen();
+          } else {
+            this.setState({open: false, children: undefined});
+            this.props.modalDidClose();
+          }
+        });
       }
-      
-      setTimeout(() => {
-        if (toValue) {
-          this.props.modalDidOpen();
-        } else {
-          this.setState({open: false, children: undefined});
-          this.props.modalDidClose();
-        }
-      }, animationDuration);
     }
   }
   render() {
