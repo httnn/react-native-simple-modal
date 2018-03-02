@@ -35,22 +35,6 @@ import Modal from 'react-native-simple-modal';
 </Modal>
 ```
 
-### Methods
-
-**Deprecated! The usage of these methods is discouraged. Use the properties `open` and `offset` instead.**
-
-```javascript
-// opens the modal
-modalRef.open();
-
-// closes the modal
-modalRef.close();
-
-// can be used to animate a translation of the modal along the Y-axis
-// useful when for example the modal has a text input and the modal needs to move up so that it's not hidden behind the keyboard
-modalRef.animateOffset(number);
-```
-
 ## Example
 ```javascript
 import React from 'react';
