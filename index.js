@@ -35,18 +35,12 @@ class Modal extends Component {
     closeOnTouchOutside: true,
     disableOnBackPress: false,
   };
-
-  constructor() {
-    super();
     
-    this.state = {
-      opacity: new Animated.Value(0),
-      scale: new Animated.Value(0.8),
-      offset: new Animated.Value(0)
-    };
-    
-    this.hardwareBackPress = this.hardwareBackPress.bind(this);
-  }
+  state = {
+    opacity: new Animated.Value(0),
+    scale: new Animated.Value(0.8),
+    offset: new Animated.Value(0)
+  };
 
   componentWillMount() {
     if (this.props.open) {
@@ -79,7 +73,7 @@ class Modal extends Component {
     }
   }
 
-  hardwareBackPress() {
+  hardwareBackPress = () => {
     if (this.props.disableOnBackPress) {
       return true;
     }
