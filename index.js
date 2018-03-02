@@ -8,26 +8,47 @@ import {
   Animated,
   Platform,
   BackHandler,
-} from 'react-native'
+} from 'react-native';
 
 class Modal extends Component {
-  constructor() {
-    super();
 
-    this.state = {
-      opacity: new Animated.Value(0),
-      scale: new Animated.Value(0.8),
-      offset: new Animated.Value(0)
-    };
+  static propTypes = {
+    open: PropTypes.bool,
+    offset: PropTypes.number,
+    overlayBackground: PropTypes.string,
+    animationDuration: PropTypes.number,
+    animationTension: PropTypes.number,
+    modalDidOpen: PropTypes.func,
+    modalDidClose: PropTypes.func,
+    closeOnTouchOutside: PropTypes.bool,
+    disableOnBackPress: PropTypes.bool,
+  };
 
-    this.hardwareBackPress = this.hardwareBackPress.bind(this);
-  }
+  static defaultProps = {
+    open: false,
+    offset: 0,
+    overlayBackground: 'rgba(0, 0, 0, 0.75)',
+    animationDuration: 200,
+    animationTension: 40,
+    modalDidOpen: () => undefined,
+    modalDidClose: () => undefined,
+    closeOnTouchOutside: true,
+    disableOnBackPress: false,
+  };
+    
+  state = {
+    opacity: new Animated.Value(0),
+    scale: new Animated.Value(0.8),
+    offset: new Animated.Value(0)
+  };
+
   componentWillMount() {
     if (this.props.open) {
       this.setState({children: this.props.children});
       this.open();
     }
   }
+
   componentWillReceiveProps(props) {
     if (props.open && props.children !== this.state.children) {
       this.setState({children: props.children});
@@ -51,7 +72,8 @@ class Modal extends Component {
       this.animateOffset(props.offset);
     }
   }
-  hardwareBackPress() {
+
+  hardwareBackPress = () => {
     if (this.state.open) {
       if (!this.props.disableOnBackPress) {
         this.close();
@@ -61,21 +83,34 @@ class Modal extends Component {
 
     return false;
   }
+
   componentDidMount() {
     if (Platform.OS === 'android') {
       BackHandler.addEventListener('hardwareBackPress', this.hardwareBackPress);
     }
   }
+
   componentWillUnmount() {
     if (Platform.OS === 'android') {
       BackHandler.removeEventListener('hardwareBackPress', this.hardwareBackPress);
     }
   }
+
+  executeCallbacks(didOpen) {
+    if (didOpen) {
+      this.props.modalDidOpen();
+    } else {
+      this.setState({open: false, children: undefined});
+      this.props.modalDidClose();
+    }
+  }
+
   setPhase(toValue) {
     if (this.state.open != toValue) {
       const {animationDuration, animationTension} = this.props;
       if (animationDuration === 0) {
         this.state.opacity.setValue(toValue);
+        this.executeCallbacks(toValue === 1);
       } else {
         Animated.timing(
           this.state.opacity,
@@ -91,19 +126,11 @@ class Modal extends Component {
             toValue: toValue ? 1 : 0.8,
             tension: animationTension
           }
-        ).start();
+        ).start(() => this.executeCallbacks(toValue === 1));
       }
-
-      setTimeout(() => {
-        if (toValue) {
-          this.props.modalDidOpen();
-        } else {
-          this.setState({open: false, children: undefined});
-          this.props.modalDidClose();
-        }
-      }, animationDuration);
     }
   }
+
   render() {
     const {opacity, open, scale, offset, children} = this.state;
     let containerStyles = [styles.absolute, styles.container, this.props.containerStyle];
@@ -134,13 +161,16 @@ class Modal extends Component {
       </View>
     );
   }
+
   open() {
     this.setState({open: true});
     this.setPhase(1);
   }
+
   close() {
     this.setPhase(0);
   }
+
   animateOffset(offset) {
     Animated.spring(
       this.state.offset,
@@ -148,31 +178,6 @@ class Modal extends Component {
     ).start();
   }
 }
-
-Modal.propTypes = {
-  open: PropTypes.bool,
-  offset: PropTypes.number,
-  overlayBackground: PropTypes.string,
-  animationDuration: PropTypes.number,
-  animationTension: PropTypes.number,
-  modalDidOpen: PropTypes.func,
-  modalDidClose: PropTypes.func,
-  closeOnTouchOutside: PropTypes.bool,
-  disableOnBackPress: PropTypes.bool,
-};
-
-Modal.defaultProps = {
-  open: false,
-  offset: 0,
-  overlayBackground: 'rgba(0, 0, 0, 0.75)',
-  animationDuration: 200,
-  animationTension: 40,
-  modalDidOpen: () => undefined,
-  modalDidClose: () => undefined,
-  closeOnTouchOutside: true,
-  disableOnBackPress: false,
-};
-
 
 const styles = StyleSheet.create({
   absolute: {

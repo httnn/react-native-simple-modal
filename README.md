@@ -14,78 +14,78 @@ See example. Make sure to put the `<Modal>` at the end of the render function so
 import Modal from 'react-native-simple-modal';
 
 <Modal
-	open={false}
-	offset={0}
-	overlayBackground={'rgba(0, 0, 0, 0.75)'}
-	animationDuration={200}
-	animationTension={40}
-	modalDidOpen={() => undefined}
-	modalDidClose={() => undefined}
-	closeOnTouchOutside={true}
-	containerStyle={{
-	   justifyContent: 'center'
-	}}
-	modalStyle={{
-	   borderRadius: 2,
-	   margin: 20,
-	   padding: 10,
-	   backgroundColor: '#F5F5F5'
-	}}
+  open={false}
+  offset={0}
+  overlayBackground="rgba(0, 0, 0, 0.75)"
+  animationDuration={200}
+  animationTension={40}
+  modalDidOpen={() => undefined}
+  modalDidClose={() => undefined}
+  closeOnTouchOutside={true}
+  containerStyle={{
+    justifyContent: 'center'
+  }}
+  modalStyle={{
+    borderRadius: 2,
+    margin: 20,
+    padding: 10,
+    backgroundColor: '#F5F5F5'
+  }}
   disableOnBackPress={false}>
-</Modal>
-```
-
-### Methods
-
-**Deprecated! The usage of these methods is discouraged. Use the properties `open` and `offset` instead.**
-
-```javascript
-// opens the modal
-modalRef.open();
-
-// closes the modal
-modalRef.close();
-
-// can be used to animate a translation of the modal along the Y-axis
-// useful when for example the modal has a text input and the modal needs to move up so that it's not hidden behind the keyboard
-modalRef.animateOffset(number);
+  </Modal>
 ```
 
 ## Example
 ```javascript
 import React from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-simple-modal';
-import {AppRegistry, Text, TouchableOpacity, View} from 'react-native';
 
-export default class Example extends React.Component {
+export default class App extends React.Component {
   state = {open: false};
+
+  modalDidOpen = () => console.log('Modal did open.')
+
+  modalDidClose = () => {
+    this.setState({open: false});
+    console.log('Modal did close.');
+  }
+
+  moveUp = () => this.setState({offset: -100})
+
+  resetPosition = () => this.setState({offset: 0})
+
+  openModal = () => this.setState({open: true})
+
+  closeModal = () => this.setState({open: false})
+
   render() {
     return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <TouchableOpacity onPress={() => this.setState({open: true})}>
+      <TouchableOpacity onPress={this.openModal}>
         <Text>Open modal</Text>
       </TouchableOpacity>
       <Modal
         offset={this.state.offset}
         open={this.state.open}
-        modalDidOpen={() => console.log('modal did open')}
-        modalDidClose={() => this.setState({open: false})}
+        modalDidOpen={this.modalDidOpen}
+        modalDidClose={this.modalDidClose}
         style={{alignItems: 'center'}}>
-        <View>
+        <View style={{alignItems: 'center'}}>
           <Text style={{fontSize: 20, marginBottom: 10}}>Hello world!</Text>
           <TouchableOpacity
           style={{margin: 5}}
-          onPress={() => this.setState({offset: -100})}>
+          onPress={this.moveUp}>
             <Text>Move modal up</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{margin: 5}}
-            onPress={() => this.setState({offset: 0})}>
+            onPress={this.resetPosition}>
             <Text>Reset modal position</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{margin: 5}}
-            onPress={() => this.setState({open: false})}>
+            onPress={this.closeModal}>
             <Text>Close modal</Text>
           </TouchableOpacity>
         </View>
@@ -94,7 +94,4 @@ export default class Example extends React.Component {
     );
   }
 }
-
-AppRegistry.registerComponent('ExampleModal', () => Example);
-
 ```
