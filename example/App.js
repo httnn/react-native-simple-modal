@@ -1,9 +1,17 @@
 import React from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-simple-modal';
-import {AppRegistry, Text, TouchableOpacity, View} from 'react-native';
 
-export default class Example extends React.Component {
+export default class App extends React.Component {
   state = {open: false};
+
+  modalDidOpen = () => console.log('Modal did open.');
+
+  modalDidClose = () => {
+    this.setState({open: false});
+    console.log('Modal did close.');
+  }
+
   render() {
     return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -13,8 +21,8 @@ export default class Example extends React.Component {
       <Modal
         offset={this.state.offset}
         open={this.state.open}
-        modalDidOpen={() => console.log('modal did open')}
-        modalDidClose={() => this.setState({open: false})}
+        modalDidOpen={this.modalDidOpen}
+        modalDidClose={this.modalDidClose}
         style={{alignItems: 'center'}}>
         <View>
           <Text style={{fontSize: 20, marginBottom: 10}}>Hello world!</Text>
@@ -39,5 +47,3 @@ export default class Example extends React.Component {
     );
   }
 }
-
-AppRegistry.registerComponent('ExampleModal', () => Example);
