@@ -14,25 +14,25 @@ See example. Make sure to put the `<Modal>` at the end of the render function so
 import Modal from 'react-native-simple-modal';
 
 <Modal
-	open={false}
-	offset={0}
-	overlayBackground={'rgba(0, 0, 0, 0.75)'}
-	animationDuration={200}
-	animationTension={40}
-	modalDidOpen={() => undefined}
-	modalDidClose={() => undefined}
-	closeOnTouchOutside={true}
-	containerStyle={{
-	   justifyContent: 'center'
-	}}
-	modalStyle={{
-	   borderRadius: 2,
-	   margin: 20,
-	   padding: 10,
-	   backgroundColor: '#F5F5F5'
-	}}
+  open={false}
+  offset={0}
+  overlayBackground="rgba(0, 0, 0, 0.75)"
+  animationDuration={200}
+  animationTension={40}
+  modalDidOpen={() => undefined}
+  modalDidClose={() => undefined}
+  closeOnTouchOutside={true}
+  containerStyle={{
+    justifyContent: 'center'
+  }}
+  modalStyle={{
+    borderRadius: 2,
+    margin: 20,
+    padding: 10,
+    backgroundColor: '#F5F5F5'
+  }}
   disableOnBackPress={false}>
-</Modal>
+  </Modal>
 ```
 
 ## Example
