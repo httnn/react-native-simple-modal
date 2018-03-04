@@ -20,7 +20,7 @@
     "android"
   ],
   "peerDependencies": {
-    "react-native": ">=0.17.0",
+    "react-native": ">=0.48.0",
     "prop-types": "^15.5.10"
   },
   "author": "bodyflex",
