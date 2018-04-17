@@ -142,7 +142,8 @@ class Modal extends Component {
     return (
       <View
         pointerEvents={open ? 'auto' : 'none'}
-        style={containerStyles}>
+        style={containerStyles}
+        {...this.props.containerProps}>
         <TouchableOpacity
           style={styles.absolute}
           disabled={!this.props.closeOnTouchOutside}
@@ -155,7 +156,8 @@ class Modal extends Component {
             styles.defaultModalStyle,
             this.props.modalStyle,
             {opacity, transform: [{scale}, {translateY: offset}]}
-          ]}>
+          ]}
+          {...this.props.modalProps}>
           {children}
         </Animated.View>
       </View>
