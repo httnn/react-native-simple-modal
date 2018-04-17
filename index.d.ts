@@ -11,7 +11,9 @@ export interface ModalProps {
   modalDidClose?: () => void;
   closeOnTouchOutside?: boolean;
   containerStyle?: ReactNative.ViewStyle;
+  containerProps?: ReactNative.ViewProperties;
   modalStyle?: ReactNative.ViewStyle;
+  modalProps?: ReactNative.ViewProperties;
   disableOnBackPress?: boolean;
 }
 
