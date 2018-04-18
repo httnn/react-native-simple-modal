@@ -27,7 +27,6 @@ class Modal extends Component {
   static defaultProps = {
     open: false,
     offset: 0,
-    overlayBackground: 'rgba(0, 0, 0, 0.75)',
     animationDuration: 200,
     animationTension: 40,
     modalDidOpen: () => undefined,
@@ -148,7 +147,11 @@ class Modal extends Component {
           disabled={!this.props.closeOnTouchOutside}
           onPress={this.close.bind(this)}
           activeOpacity={0.75}>
-          <Animated.View style={{flex: 1, opacity, backgroundColor: this.props.overlayBackground}} />
+          <Animated.View style={[
+            styles.defaultOverlayStyle,
+            {opacity},
+            this.props.overlayStyle
+          ]} />
         </TouchableOpacity>
         <Animated.View
           style={[
@@ -196,6 +199,10 @@ const styles = StyleSheet.create({
     margin: 20,
     padding: 10,
     backgroundColor: '#F5F5F5'
+  },
+  defaultOverlayStyle: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.75)'
   },
   hidden: {
     top: -10000,
