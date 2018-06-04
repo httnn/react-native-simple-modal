@@ -37,7 +37,7 @@ class Modal extends Component {
   state = {
     opacity: new Animated.Value(0),
     scale: new Animated.Value(0.8),
-    offset: new Animated.Value(0)
+    offset: new Animated.Value(this.props.offset)
   };
 
   componentWillMount() {
