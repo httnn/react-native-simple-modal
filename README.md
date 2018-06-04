@@ -16,7 +16,6 @@ import Modal from 'react-native-simple-modal';
 <Modal
   open={false}
   offset={0}
-  overlayBackground="rgba(0, 0, 0, 0.75)"
   animationDuration={200}
   animationTension={40}
   modalDidOpen={() => undefined}
@@ -24,6 +23,10 @@ import Modal from 'react-native-simple-modal';
   closeOnTouchOutside={true}
   containerStyle={{
     justifyContent: 'center'
+  }}
+  overlayStyle={{
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    flex: 1
   }}
   modalStyle={{
     borderRadius: 2,
