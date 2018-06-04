@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -7,11 +7,10 @@ import {
   TouchableOpacity,
   Animated,
   Platform,
-  BackHandler,
+  BackHandler
 } from 'react-native';
 
 class Modal extends Component {
-
   static propTypes = {
     open: PropTypes.bool,
     offset: PropTypes.number,
@@ -21,7 +20,7 @@ class Modal extends Component {
     modalDidOpen: PropTypes.func,
     modalDidClose: PropTypes.func,
     closeOnTouchOutside: PropTypes.bool,
-    disableOnBackPress: PropTypes.bool,
+    disableOnBackPress: PropTypes.bool
   };
 
   static defaultProps = {
@@ -32,9 +31,9 @@ class Modal extends Component {
     modalDidOpen: () => undefined,
     modalDidClose: () => undefined,
     closeOnTouchOutside: true,
-    disableOnBackPress: false,
+    disableOnBackPress: false
   };
-    
+
   state = {
     opacity: new Animated.Value(0),
     scale: new Animated.Value(0.8),
@@ -43,14 +42,14 @@ class Modal extends Component {
 
   componentWillMount() {
     if (this.props.open) {
-      this.setState({children: this.props.children});
+      this.setState({ children: this.props.children });
       this.open();
     }
   }
 
   componentWillReceiveProps(props) {
     if (props.open && props.children !== this.state.children) {
-      this.setState({children: props.children});
+      this.setState({ children: props.children });
     }
 
     if (props.animationDuration === 0) {
@@ -81,7 +80,7 @@ class Modal extends Component {
     }
 
     return false;
-  }
+  };
 
   componentDidMount() {
     if (Platform.OS === 'android') {
@@ -91,7 +90,10 @@ class Modal extends Component {
 
   componentWillUnmount() {
     if (Platform.OS === 'android') {
-      BackHandler.removeEventListener('hardwareBackPress', this.hardwareBackPress);
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        this.hardwareBackPress
+      );
     }
   }
 
@@ -99,40 +101,38 @@ class Modal extends Component {
     if (didOpen) {
       this.props.modalDidOpen();
     } else {
-      this.setState({open: false, children: undefined});
+      this.setState({ open: false, children: undefined });
       this.props.modalDidClose();
     }
   }
 
   setPhase(toValue) {
     if (this.state.open != toValue) {
-      const {animationDuration, animationTension} = this.props;
+      const { animationDuration, animationTension } = this.props;
       if (animationDuration === 0) {
         this.state.opacity.setValue(toValue);
         this.executeCallbacks(toValue === 1);
       } else {
-        Animated.timing(
-          this.state.opacity,
-          {
-            toValue,
-            duration: animationDuration
-          }
-        ).start();
+        Animated.timing(this.state.opacity, {
+          toValue,
+          duration: animationDuration
+        }).start();
 
-        Animated.spring(
-          this.state.scale,
-          {
-            toValue: toValue ? 1 : 0.8,
-            tension: animationTension
-          }
-        ).start(() => this.executeCallbacks(toValue === 1));
+        Animated.spring(this.state.scale, {
+          toValue: toValue ? 1 : 0.8,
+          tension: animationTension
+        }).start(() => this.executeCallbacks(toValue === 1));
       }
     }
   }
 
   render() {
-    const {opacity, open, scale, offset, children} = this.state;
-    let containerStyles = [styles.absolute, styles.container, this.props.containerStyle];
+    const { opacity, open, scale, offset, children } = this.state;
+    let containerStyles = [
+      styles.absolute,
+      styles.container,
+      this.props.containerStyle
+    ];
 
     if (!this.state.open) {
       containerStyles.push(styles.hidden);
@@ -142,25 +142,30 @@ class Modal extends Component {
       <View
         pointerEvents={open ? 'auto' : 'none'}
         style={containerStyles}
-        {...this.props.containerProps}>
+        {...this.props.containerProps}
+      >
         <TouchableOpacity
           style={styles.absolute}
           disabled={!this.props.closeOnTouchOutside}
           onPress={this.close.bind(this)}
-          activeOpacity={0.75}>
-          <Animated.View style={[
-            styles.defaultOverlayStyle,
-            {opacity},
-            this.props.overlayStyle
-          ]} />
+          activeOpacity={0.75}
+        >
+          <Animated.View
+            style={[
+              styles.defaultOverlayStyle,
+              { opacity },
+              this.props.overlayStyle
+            ]}
+          />
         </TouchableOpacity>
         <Animated.View
           style={[
             styles.defaultModalStyle,
             this.props.modalStyle,
-            {opacity, transform: [{scale}, {translateY: offset}]}
+            { opacity, transform: [{ scale }, { translateY: offset }] }
           ]}
-          {...this.props.modalProps}>
+          {...this.props.modalProps}
+        >
           {children}
         </Animated.View>
       </View>
@@ -168,7 +173,7 @@ class Modal extends Component {
   }
 
   open() {
-    this.setState({open: true});
+    this.setState({ open: true });
     this.setPhase(1);
   }
 
@@ -177,10 +182,7 @@ class Modal extends Component {
   }
 
   animateOffset(offset) {
-    Animated.spring(
-      this.state.offset,
-      {toValue: offset}
-    ).start();
+    Animated.spring(this.state.offset, { toValue: offset }).start();
   }
 }
 

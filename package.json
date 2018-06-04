@@ -5,7 +5,8 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint index.js"
   },
   "repository": {
     "type": "git",
@@ -28,5 +29,11 @@
   "bugs": {
     "url": "https://github.com/bodyflex/react-native-simple-modal/issues"
   },
-  "homepage": "https://github.com/bodyflex/react-native-simple-modal#readme"
+  "homepage": "https://github.com/bodyflex/react-native-simple-modal#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.9.1",
+    "eslint-plugin-react-native": "^3.2.1"
+  }
 }
