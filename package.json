@@ -1,6 +1,6 @@
 {
   "name": "react-native-simple-modal",
-  "version": "8.0.0",
+  "version": "9.0.0",
   "description": "A simple JavaScript modal component for React Native.",
   "main": "index.js",
   "types": "index.d.ts",
