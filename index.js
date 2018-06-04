@@ -147,7 +147,7 @@ class Modal extends Component {
         <TouchableOpacity
           style={styles.absolute}
           disabled={!this.props.closeOnTouchOutside}
-          onPress={this.close.bind(this)}
+          onPress={this.close}
           activeOpacity={0.75}
         >
           <Animated.View
@@ -177,9 +177,9 @@ class Modal extends Component {
     this.setPhase(1);
   }
 
-  close() {
+  close = () => {
     this.setPhase(0);
-  }
+  };
 
   animateOffset(offset) {
     Animated.spring(this.state.offset, { toValue: offset }).start();
