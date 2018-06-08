@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import {
   View,
+  ViewPropTypes,
   StyleSheet,
   TouchableOpacity,
   Animated,
@@ -14,7 +15,7 @@ class Modal extends Component {
   static propTypes = {
     open: PropTypes.bool,
     offset: PropTypes.number,
-    overlayBackground: PropTypes.string,
+    overlayStyle: ViewPropTypes.style,
     animationDuration: PropTypes.number,
     animationTension: PropTypes.number,
     modalDidOpen: PropTypes.func,
