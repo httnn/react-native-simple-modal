@@ -4,7 +4,7 @@ import * as ReactNative from 'react-native';
 export interface ModalProps {
   open?: boolean;
   offset?: number;
-  overlayBackground?: string;
+  overlayStyle?: ReactNative.ViewStyle;
   animationDuration?: number;
   animationTension?: number;
   modalDidOpen?: () => void;
