@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
   },
   defaultOverlayStyle: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.75)'
+    backgroundColor: 'rgba(0, 0, 0, 0.60)'
   },
   hidden: {
     top: -10000,
