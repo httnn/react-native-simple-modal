@@ -26,6 +26,7 @@ See example. Make sure to put the `<Modal>` at the end of the render function so
 import Modal from "react-native-resimple-modal";
 
 <Modal
+  useNativeDriver={true}
   animationDuration={200}
   animationTension={40}
   closeOnTouchOutside={true}

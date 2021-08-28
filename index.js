@@ -41,6 +41,7 @@ class Modal extends Component {
     opacity: new Animated.Value(0),
     scale: new Animated.Value(0.8),
     offset: new Animated.Value(this.props.offset),
+    useNativeDriver: this.props.useNativeDriver,
   };
 
   UNSAFE_componentWillMount() {
@@ -51,6 +52,10 @@ class Modal extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(props) {
+    if (props.useNativeDriver !== this.props.useNativeDriver) {
+      this.setState({ useNativeDriver: props.useNativeDriver });
+    }
+
     if (props.open && props.children !== this.state.children) {
       this.setState({ children: props.children });
     }
@@ -71,10 +76,6 @@ class Modal extends Component {
 
     if (props.offset !== this.props.offset) {
       this.animateOffset(props.offset);
-    }
-
-    if (props.useNativeDriver !== this.props.useNativeDriver) {
-      this.setState({ useNativeDriver: props.useNativeDriver });
     }
   }
 
