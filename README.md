@@ -10,7 +10,11 @@ This is just a simple modification for the original package to elimenate some wa
 
 ## Installation
 
-`npm install react-native-simple-modal --save`
+`npm install react-native-resimple-modal --save`
+
+Or
+
+`yarn add react-native-resimple-modal`
 
 ## Usage
 
@@ -19,7 +23,7 @@ See example. Make sure to put the `<Modal>` at the end of the render function so
 ### Properties and their default values
 
 ```javascript
-import Modal from "react-native-simple-modal";
+import Modal from "react-native-resimple-modal";
 
 <Modal
   animationDuration={200}
@@ -53,7 +57,7 @@ import Modal from "react-native-simple-modal";
 ```javascript
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import Modal from "react-native-simple-modal";
+import Modal from "react-native-resimple-modal";
 
 export default class App extends React.Component {
   state = { open: false };
