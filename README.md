@@ -1,8 +1,10 @@
-# react-native-simple-modal
+# react-native-resimple-modal
 
-A simple JavaScript modal component for React Native. Works on both iOS and Android.
+A simple JavaScript modal component for React Native. Works on iOS, Android and Windows.
 
-**Looking for maintainers! I'm not actively developing with React Native anymore and I don't have much time to keep this library up-to-date. If you're interested, hit me up: max.huttunen@gmail.com**
+**All credits goes to [maxjvh](https://github.com/maxjvh). If you're interested, hit him up on: max.huttunen@gmail.com**
+
+This is just a simple modification for the original package to elimenate some warnings especially for Windows platform.
 
 <img src="https://i.imgur.com/EiwkCWn.gif" width="300" />
 
@@ -25,7 +27,7 @@ import Modal from "react-native-simple-modal";
   closeOnTouchOutside={true}
   containerProps={undefined}
   containerStyle={{
-    justifyContent: "center"
+    justifyContent: "center",
   }}
   disableOnBackPress={false}
   modalDidClose={() => undefined}
@@ -35,13 +37,13 @@ import Modal from "react-native-simple-modal";
     borderRadius: 2,
     margin: 20,
     padding: 10,
-    backgroundColor: "#F5F5F5"
+    backgroundColor: "#F5F5F5",
   }}
   offset={0}
   open={false}
   overlayStyle={{
     backgroundColor: "rgba(0, 0, 0, 0.75)",
-    flex: 1
+    flex: 1,
   }}
 />;
 ```
