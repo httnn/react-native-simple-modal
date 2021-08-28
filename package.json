@@ -1,6 +1,6 @@
 {
-  "name": "react-native-simple-modal",
-  "version": "9.0.1",
+  "name": "react-native-resimple-modal",
+  "version": "9.0.4",
   "description": "A simple JavaScript modal component for React Native.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bodyflex/react-native-simple-modal.git"
+    "url": "git+https://github.com/Omar-Belghaouti/react-native-simple-modal.git"
   },
   "keywords": [
     "modal",
@@ -25,11 +25,18 @@
     "prop-types": "^15.5.10"
   },
   "author": "bodyflex",
+  "contributors": [
+    {
+      "name": "Omar Belghaouti",
+      "email": "omarbelghaouti@gmail.com",
+      "url": "https://omarbelghaouti.space/"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bodyflex/react-native-simple-modal/issues"
   },
-  "homepage": "https://github.com/bodyflex/react-native-simple-modal#readme",
+  "homepage": "https://github.com/Omar-Belghaouti/react-native-simple-modal#readme",
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",

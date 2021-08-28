@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import {
   View,
@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   Animated,
   Platform,
-  BackHandler
-} from 'react-native';
+  BackHandler,
+} from "react-native";
 
 class Modal extends Component {
   static propTypes = {
@@ -21,7 +21,8 @@ class Modal extends Component {
     modalDidOpen: PropTypes.func,
     modalDidClose: PropTypes.func,
     closeOnTouchOutside: PropTypes.bool,
-    disableOnBackPress: PropTypes.bool
+    disableOnBackPress: PropTypes.bool,
+    useNativeDriver: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -32,23 +33,29 @@ class Modal extends Component {
     modalDidOpen: () => undefined,
     modalDidClose: () => undefined,
     closeOnTouchOutside: true,
-    disableOnBackPress: false
+    disableOnBackPress: false,
+    useNativeDriver: true,
   };
 
   state = {
     opacity: new Animated.Value(0),
     scale: new Animated.Value(0.8),
-    offset: new Animated.Value(this.props.offset)
+    offset: new Animated.Value(this.props.offset),
+    useNativeDriver: this.props.useNativeDriver,
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.props.open) {
       this.setState({ children: this.props.children });
       this.open();
     }
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
+    if (props.useNativeDriver !== this.props.useNativeDriver) {
+      this.setState({ useNativeDriver: props.useNativeDriver });
+    }
+
     if (props.open && props.children !== this.state.children) {
       this.setState({ children: props.children });
     }
@@ -84,15 +91,15 @@ class Modal extends Component {
   };
 
   componentDidMount() {
-    if (Platform.OS === 'android') {
-      BackHandler.addEventListener('hardwareBackPress', this.hardwareBackPress);
+    if (Platform.OS === "android") {
+      BackHandler.addEventListener("hardwareBackPress", this.hardwareBackPress);
     }
   }
 
   componentWillUnmount() {
-    if (Platform.OS === 'android') {
+    if (Platform.OS === "android") {
       BackHandler.removeEventListener(
-        'hardwareBackPress',
+        "hardwareBackPress",
         this.hardwareBackPress
       );
     }
@@ -116,12 +123,14 @@ class Modal extends Component {
       } else {
         Animated.timing(this.state.opacity, {
           toValue,
-          duration: animationDuration
+          duration: animationDuration,
+          useNativeDriver: this.state.useNativeDriver,
         }).start();
 
         Animated.spring(this.state.scale, {
           toValue: toValue ? 1 : 0.8,
-          tension: animationTension
+          tension: animationTension,
+          useNativeDriver: this.state.useNativeDriver,
         }).start(() => this.executeCallbacks(toValue === 1));
       }
     }
@@ -132,7 +141,7 @@ class Modal extends Component {
     let containerStyles = [
       styles.absolute,
       styles.container,
-      this.props.containerStyle
+      this.props.containerStyle,
     ];
 
     if (!this.state.open) {
@@ -141,7 +150,7 @@ class Modal extends Component {
 
     return (
       <View
-        pointerEvents={open ? 'auto' : 'none'}
+        pointerEvents={open ? "auto" : "none"}
         style={containerStyles}
         {...this.props.containerProps}
       >
@@ -155,7 +164,7 @@ class Modal extends Component {
             style={[
               styles.defaultOverlayStyle,
               { opacity },
-              this.props.overlayStyle
+              this.props.overlayStyle,
             ]}
           />
         </TouchableOpacity>
@@ -163,7 +172,7 @@ class Modal extends Component {
           style={[
             styles.defaultModalStyle,
             this.props.modalStyle,
-            { opacity, transform: [{ scale }, { translateY: offset }] }
+            { opacity, transform: [{ scale }, { translateY: offset }] },
           ]}
           {...this.props.modalProps}
         >
@@ -183,38 +192,41 @@ class Modal extends Component {
   };
 
   animateOffset(offset) {
-    Animated.spring(this.state.offset, { toValue: offset }).start();
+    Animated.spring(this.state.offset, {
+      toValue: offset,
+      useNativeDriver: this.state.useNativeDriver,
+    }).start();
   }
 }
 
 const styles = StyleSheet.create({
   absolute: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0)'
+    backgroundColor: "rgba(0, 0, 0, 0)",
   },
   container: {
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   defaultModalStyle: {
     borderRadius: 2,
     margin: 20,
     padding: 10,
-    backgroundColor: '#F5F5F5'
+    backgroundColor: "#F5F5F5",
   },
   defaultOverlayStyle: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.75)'
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
   },
   hidden: {
     top: -10000,
     left: 0,
     height: 0,
-    width: 0
-  }
+    width: 0,
+  },
 });
 
 export default Modal;

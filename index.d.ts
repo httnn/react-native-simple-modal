@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as ReactNative from 'react-native';
+import * as React from "react";
+import * as ReactNative from "react-native";
 
 export interface ModalProps {
   open?: boolean;
@@ -15,6 +15,7 @@ export interface ModalProps {
   modalStyle?: ReactNative.ViewStyle;
   modalProps?: ReactNative.ViewProperties;
   disableOnBackPress?: boolean;
+  useNativeDriver?: boolean;
 }
 
 declare class Modal extends React.Component<ModalProps, {}> {
